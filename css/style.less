@@ -302,11 +302,6 @@ ul.no-list{
 		margin: 0px auto;
 		background: @color-white;
 		border: @color-white 1px solid;
-		.banner{
-			> img {
-				width: 100%;
-			}
-		}
 	}
 	&.showed{
 		.transition(all 0.3s);
@@ -366,6 +361,11 @@ ul.no-list{
 }
 
 .area-info{
+	.banner{
+		> img {
+			width: 100%;
+		}
+	}
 	.animals-list{
 		border-top: @super-light-gray 2px solid;
 		overflow: hidden;
@@ -394,6 +394,10 @@ ul.no-list{
 			}
 		}
 	}
+}
+
+.single-area{
+	margin-top: 60px;
 }
 
 footer{

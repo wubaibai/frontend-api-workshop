@@ -1,18 +1,38 @@
 //所有要共用的變數都放在最外層
+var jq_GET = (function(qurl) {
+	if (qurl == "") return {};
+	var b = {};
+	for (var i = 0; i < qurl.length; ++i)
+	{
+		var p=qurl[i].split('=');
+		if (p.length != 2) continue;
+		var nValue = decodeURIComponent(p[1].replace(/\+/g, " "));
+		if(typeof b[p[0]] == "string"){
+			var newArr = [];
+			newArr.push(b[p[0]]);
+			newArr.push(nValue);
+			b[p[0]] = newArr;	
+		} else {
+			b[p[0]] = nValue;	
+		}
+	}
+	return b;
+})(window.location.search.substr(1).split('&'));
+
 var winW;
 var winH;
 var pageNow;
-
+var serverhost = "http://trusty-moment-134623.appspot.com"
 var apiURL = {
-	"park_info" : "http://trusty-moment-134623.appspot.com/park_info",
-	"area_list" : "http://trusty-moment-134623.appspot.com/area_list",
-	"area_info" : "http://trusty-moment-134623.appspot.com/area_info"
+	"park_info" : serverhost+"/park_info",
+	"area_list" : serverhost+"/area_list",
+	"area_info" : serverhost+"/area_info",
+	"add_favi_count" : serverhost+"/add_favi_count" 
 }
 
 $(document).ready(function(){
 	winW = $(window).width();
 	winH = $(window).height();
-
 	pageNow = $('body').attr('rel');
 
 	$('.leave-overlay').on('click',function(){
@@ -22,8 +42,9 @@ $(document).ready(function(){
 
 	$('body').on('click','.like-wrap',function(){
 		var theRel = $(this).attr('rel');
+		var thisLikeWrap = $(this);
 		addFavi(theRel,function(data){
-			$(this).find('[datakey="favicount"]').text(data["abc"]);
+			thisLikeWrap.find('[datakey="faviCount"]').text(data);
 		});
 	});
 });
@@ -37,6 +58,12 @@ $(window).load(function(){
 	if(pageNow == "index"){
 		get_park_info();
 		get_area_list();
+	}
+
+	if(pageNow == "area"){
+		if(jq_GET["area"] && jq_GET["area"] != ""){
+			getAreaInfo2(jq_GET["area"]);
+		}
 	}
 });
 
@@ -58,6 +85,7 @@ function get_park_info(){
 			}
 		},
 		error : function( jqxhr, textStatus, error ) {
+			console.log("get_park_info API error!!!");
 		}
 	});
 }
@@ -81,6 +109,7 @@ function get_area_list(callback){
 			}
 		},
 		error : function( jqxhr, textStatus, error ) {
+			console.log("get_area_list API error!!!");
 		}
 	});
 }
@@ -125,6 +154,8 @@ function getAreaInfo(areaid){
 					});
 				}
 				overlay(true);
+			} else {
+				console.log(data["error"]);
 			}
 		},
 		error : function( jqxhr, textStatus, error ) {
@@ -132,12 +163,68 @@ function getAreaInfo(areaid){
 	});
 }
 
-function addFavi(area_id,callback){
+function getAreaInfo2(areaid){
+	$.ajax({
+		url: apiURL["area_info"],
+		type: "POST",
+		dataType: "json",
+		data:{
+			"area_id" : areaid
+		},
+		cache: false,
+		success: function(data) {
+			if(data["status"] && data["area"]){
+				var areainfoTemplate = $('.web-ui-template .area-info').clone();
+				$.each(data["area"],function(k,v){
+					var areaInfo = areainfoTemplate.find('.area-info-main');
+					var target = areaInfo.find('[datakey="'+k+'"]');
+					var targetPos = target.attr('datapos');
+					if(targetPos && targetPos != ""){
+						areaInfo.find('[datakey="'+k+'"]').attr(targetPos,v);
+					} else {
+						areaInfo.find('[datakey="'+k+'"]').text(v);
+					}
+				});
+				$('.single-area').append(areainfoTemplate);
+
+				if(data["area"]["animals_list"]){
+					var animalListContainer = $('.single-area .animals-list');
+					var animalListItem = $('.web-ui-template .animal-list-item');
+					valueToDom(animalListContainer,animalListItem,data["area"]["animals_list"],function(){
+						setAreaListJS();
+					});
+				}
+			} else {
+				$('.single-area').text(data["error"]);
+			}
+		},
+		error : function( jqxhr, textStatus, error ) {
+		}
+	});
+}
+
+function addFavi(areaid,callback){
 	var thisCallback = callback;
+	$.ajax({
+		url: apiURL["add_favi_count"],
+		type: "POST",
+		dataType: "json",
+		data:{
+			"area_id" : areaid
+		},
+		cache: false,
+		success: function(data) {
+			if(data["status"] && data["faviCount"]){
+				if(thisCallback && typeof(thisCallback) == "function"){
+					console.log(data["faviCount"]);
+					thisCallback(data["faviCount"]);
+				}
+			}
+		},
+		error : function( jqxhr, textStatus, error ) {
+		}
+	});
 	
-	if(thisCallback && typeof(thisCallback) == "function"){
-		thisCallback();
-	}
 }
 
 function valueToDom(uiarea,uitemplate,dataset,callback){

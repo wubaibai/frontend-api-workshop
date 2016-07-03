@@ -155,9 +155,6 @@ ul.no-list li {
   background: #ffffff;
   border: #ffffff 1px solid;
 }
-.full-overlay .overlay-content .banner > img {
-  width: 100%;
-}
 .full-overlay.showed {
   -webkit-transition: all 0.3s;
   -moz-transition: all 0.3s;
@@ -214,6 +211,9 @@ ul.no-list li {
 .area-list .area-list-item h4 {
   color: #2196F3;
 }
+.area-info .banner > img {
+  width: 100%;
+}
 .area-info .animals-list {
   border-top: #e9e9e9 2px solid;
   overflow: hidden;
@@ -241,6 +241,9 @@ ul.no-list li {
 .area-info .animals-list .animal-list-item div[datakey="title"] {
   font-weight: bold;
   font-size: 20px;
+}
+.single-area {
+  margin-top: 60px;
 }
 footer {
   background-color: #bbbbbb;

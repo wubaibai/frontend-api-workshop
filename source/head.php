@@ -43,51 +43,11 @@
 	<link type="text/css" rel="stylesheet" href="library/bootstrap/css/bootstrap.min.css">
 	<script type="text/javascript" src="library/bootstrap/js/bootstrap.min.js"></script>
 
-	<!-- Validate 是用來作 form 驗證 -->
-	<script type="text/javascript" src="library/jquery.validate.js"></script>
-
-    <!-- Zipcode 是用來作填地址的 plugin -->
-    <script type="text/javascript" src="library/twzipcode/jquery.twzipcode-1.6.7.js"></script>
-	
 	<!-- Font Awsome 是 font-face 的 plugin 有很多 icon -->
 	<link type="text/css" rel="stylesheet" href="library/font-awesome/css/font-awesome.css">
 
-	<!-- jQuery Textarea Autosize -->
-	<script type="text/javascript" src="library/jquery-autosize/jquery.autosize-min.js"></script>
-	<script>
-		$(document).ready(function(){
-			$('textarea').autosize();  
-		});
-	</script>
-
-	<!-- for jQuery Smooth Anchors START (一頁式網頁滾動 + 網址記錄) -->
-	<script type="text/javascript" src="library/smooth-anchors/SmoothAnchors.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			// Select Navi 裡的按鈕連結 a, EX: <a href="#section-1"></a>
-			// 內容的 Section Div, EX: <div class="section-1"></div>
-			//$('navi-wrapper a').SmoothAnchors();
-		});
-	</script>
-
-	<!-- My JS 自己這個站的 js, 最好取名成跟這個網站有關的英文 -->
-	<script type="text/javascript" src="js/demo.js"></script>
-
 	<!-- Style Compile by Gulp Less -->
 	<link type="text/css" rel="stylesheet" href="css/style.css">
-
-	<!-- Google Analytics ***** 務必更新 GA Account No# *****
-	<script type="text/javascript">
-		// var _gaq = _gaq || [];
-		// _gaq.push(['_setAccount', 'UA-31519246-1']);
-		// _gaq.push(['_trackPageview']);
-
-		// (function() {
-		// var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		// 	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		// 	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		// })();
-	</script>
 
 	<!-- 這個是讓 IE9 以下的 IE 也可以跑 html5 -->
 	<!--[if lt IE 9]>
