@@ -1,3 +1,7 @@
+/*
+API Document : https://docs.google.com/spreadsheets/d/1UaNpssETGpOsEoaHQThARCNV1D45McaeWAfnTVq0MsU/edit
+*/
+
 //所有要共用的變數都放在最外層
 var jq_GET = (function(qurl) {
 	if (qurl == "") return {};
@@ -90,8 +94,7 @@ function get_park_info(){
 	});
 }
 
-function get_area_list(callback){
-	var thisCallback = callback;
+function get_area_list(){
 	$.ajax({
 		url: apiURL["area_list"],
 		type: "POST",
