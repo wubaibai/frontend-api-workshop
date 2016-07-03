@@ -115,10 +115,15 @@ function get_area_list(callback){
 }
 
 function setAreaListJS(){
-	$('.area-list-item .click-item').off('click');
+	$('.area-list-item .click-item, .gotoarea').off('click');
 	$('.area-list-item .click-item').on('click',function(){
 		var theRel = $(this).parents('.area-list-item').attr('rel');
 		getAreaInfo(theRel);
+	});
+
+	$('.gotoarea').on('click',function(){
+		var theRel = $(this).parents('.area-list-item').attr('rel');
+		window.open("area.php?area="+theRel,"_blank");
 	});
 }
 

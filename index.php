@@ -41,6 +41,7 @@
 				<div class="like-wrap" datakey="ID" datapos="rel"><i class="fa fa-heart"></i> <span datakey="faviCount"></span></div>
 				<h4 datakey="title" class="click-item"></h4>
 				<div datakey="description"></div>
+				<div class="link gotoarea">單一園區頁面</div>
 			</div>
 		</div>
 

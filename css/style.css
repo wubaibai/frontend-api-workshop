@@ -211,6 +211,18 @@ ul.no-list li {
 .area-list .area-list-item h4 {
   color: #2196F3;
 }
+.area-list .area-list-item .gotoarea {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  background: #e9e9e9;
+  padding: 4px 8px;
+  color: #575757;
+  cursor: pointer;
+}
+.area-list .area-list-item .gotoarea:hover {
+  background: #bbbbbb;
+}
 .area-info .banner > img {
   width: 100%;
 }
