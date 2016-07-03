@@ -215,6 +215,7 @@ ul.no-list{
 /* -- TextColor 
 ----------------------------------------*/
 	@color-primary: #2196F3;
+	@color-accent: #FF5252;
 	@color-white: #ffffff;
 	@super-light-gray: #e9e9e9;
 	@light-gray: #bbbbbb;
@@ -264,6 +265,10 @@ ul.no-list{
 
 .padding-8{
 	padding: 8px;
+}
+
+.click-item{
+	cursor: pointer;
 }
 
 .full-overlay{
@@ -324,6 +329,17 @@ ul.no-list{
 	}
 }
 
+.like-wrap{
+	color: @light-gray;
+	text-align: right;
+	font-size: 13px;
+	margin-bottom: -30px;
+	cursor: pointer;
+	&:hover{
+		color: @color-accent;
+	}
+}
+
 .area-list{
 	overflow: hidden;
 	.area-list-item{
@@ -332,7 +348,6 @@ ul.no-list{
 		float: left;
 		border: fadeout(@color-primary,70%) 1px solid;
 		box-sizing: border-box;
-		cursor: pointer;
 		img {
 			width: 100%;
 			height: 140px;

@@ -117,6 +117,9 @@ ul.no-list li {
 .padding-8 {
   padding: 8px;
 }
+.click-item {
+  cursor: pointer;
+}
 .full-overlay {
   position: fixed;
   top: 50%;
@@ -174,6 +177,16 @@ ul.no-list li {
 .park-info i {
   color: #bbbbbb;
 }
+.like-wrap {
+  color: #bbbbbb;
+  text-align: right;
+  font-size: 13px;
+  margin-bottom: -30px;
+  cursor: pointer;
+}
+.like-wrap:hover {
+  color: #FF5252;
+}
 .area-list {
   overflow: hidden;
 }
@@ -183,7 +196,6 @@ ul.no-list li {
   float: left;
   border: rgba(33, 150, 243, 0.3) 1px solid;
   box-sizing: border-box;
-  cursor: pointer;
 }
 .area-list .area-list-item img {
   width: 100%;

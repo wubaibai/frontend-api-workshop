@@ -35,9 +35,10 @@
 	<!-- UI Tempalte for list items-->
 	<div class="web-ui-template">
 		<div class="area-list-item">
-			<div class="banner"><img datakey="img" datapos="src" src=""/></div>
+			<div class="banner click-item"><img datakey="img" datapos="src" src=""/></div>
 			<div class="padding-8">
-				<h4 datakey="title"></h4>
+				<div class="like-wrap" datakey="ID" datapos="rel"><i class="fa fa-heart"></i> <span datakey="favicount">123</span></div>
+				<h4 datakey="title" class="click-item"></h4>
 				<div datakey="description"></div>
 			</div>
 		</div>
@@ -46,6 +47,7 @@
 			<div class="area-info-main">
 				<div class="banner"><img datakey="img" datapos="src" src=""/></div>
 				<div class="padding-16">
+					<div class="like-wrap" datakey="ID" datapos="rel"><i class="fa fa-heart"></i> 123</div>
 					<h3><span datakey="title"></span></h3>
 					<div datakey="description"></div>
 				</div>

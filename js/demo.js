@@ -19,6 +19,13 @@ $(document).ready(function(){
 		$('.overlay-content').html('');
 		overlay(false);
 	});
+
+	$('body').on('click','.like-wrap',function(){
+		var theRel = $(this).attr('rel');
+		addFavi(theRel,function(data){
+			$(this).find('[datakey="favicount"]').text(data["abc"]);
+		});
+	});
 });
 
 $(window).resize(function(){
@@ -79,9 +86,9 @@ function get_area_list(callback){
 }
 
 function setAreaListJS(){
-	$('.area-list-item').off('click');
-	$('.area-list-item').on('click',function(){
-		var theRel = $(this).attr('rel');
+	$('.area-list-item .click-item').off('click');
+	$('.area-list-item .click-item').on('click',function(){
+		var theRel = $(this).parents('.area-list-item').attr('rel');
 		getAreaInfo(theRel);
 	});
 }
@@ -125,6 +132,14 @@ function getAreaInfo(areaid){
 	});
 }
 
+function addFavi(area_id,callback){
+	var thisCallback = callback;
+	
+	if(thisCallback && typeof(thisCallback) == "function"){
+		thisCallback();
+	}
+}
+
 function valueToDom(uiarea,uitemplate,dataset,callback){
 	var thisCallback = callback;
 	var uiarea = uiarea;
@@ -133,16 +148,15 @@ function valueToDom(uiarea,uitemplate,dataset,callback){
 		$.each(dataset,function(i,uidata){
 			var newUIitem = uitemplate.clone().removeClass('web-ui-template');
 			$.each(uidata,function(k,v){
+				var data_target = newUIitem.find('[datakey="'+k+'"]');
+				var data_Pos = data_target.attr('datapos');
+				if(data_Pos && data_Pos != ""){
+					newUIitem.find('[datakey="'+k+'"]').attr(data_Pos,v);
+				} else {
+					newUIitem.find('[datakey="'+k+'"]').text(v);
+				}
 				if(k == "ID"){
 					newUIitem.attr('rel',v);
-				} else {
-					var data_target = newUIitem.find('[datakey="'+k+'"]');
-					var data_Pos = data_target.attr('datapos');
-					if(data_Pos && data_Pos != ""){
-						newUIitem.find('[datakey="'+k+'"]').attr(data_Pos,v);
-					} else {
-						newUIitem.find('[datakey="'+k+'"]').text(v);
-					}
 				}
 			});
 			uiarea.append(newUIitem);
