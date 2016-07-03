@@ -1,8 +1,8 @@
-#25sprout Website Template
+#Frontend API Workshop
 
 ## 使用步驟
-- git clone `ssh://git@nas25lol.myqnapcloud.com:12222/25sproutTemplate/25Website.git`
-- cd `25Website`
+- git clone `https://github.com/wubaibai/frontend-api-workshop.git`
+- cd `frontend-api-workshop`
 - npm install
 - gulp
 - 打開 Chrome 貼上網址： `http://localhost:8888` 就可以看到網頁了。
