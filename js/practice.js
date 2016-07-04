@@ -3,13 +3,9 @@ API Document : https://docs.google.com/spreadsheets/d/1UaNpssETGpOsEoaHQThARCNV1
 */
 
 //所有要共用的變數都放在最外層
-var winW;
-var winH;
 var pageNow;
 
 $(document).ready(function(){
-	winW = $(window).width();
-	winH = $(window).height();
 	pageNow = $('body').attr('rel');
 
 	$('.leave-overlay').on('click',function(){
@@ -17,22 +13,18 @@ $(document).ready(function(){
 		overlay(false);
 	});
 
-	$('body').on('click','.like-wrap',function(){
-		var theRel = $(this).attr('rel');
-		var thisLikeWrap = $(this);
-	});
-});
-
-$(window).resize(function(){
-	winW = $(window).width();
-	winH = $(window).height();
+	// $('body').on('click','.like-wrap',function(){
+	// 	var theRel = $(this).attr('rel');
+	// 	var thisLikeWrap = $(this);
+	// 	addFavi(theRel,function(data){
+	// 		thisLikeWrap.find('[datakey="faviCount"]').text(data);
+	// 	});
+	// });
 });
 
 $(window).load(function(){
-	if(pageNow == "index"){
-		get_park_info();
-		get_area_list();
-	}
+	get_park_info();
+	get_area_list();
 });
 
 //你可以寫很多自己的 function 在各個地方用;
@@ -110,25 +102,63 @@ function getAreaInfo(areaid){
 		},
 		success: function(data) {
 			// console.log(data);
-			// if(data["status"] && data["area_list"]){
-			// 	var areaUI = $('.web-ui-template .area-list-item');
-			// 	$.each(data["area_list"],function(i,area){
-			// 		var newAreaUI = areaUI.clone();
-			// 		$.each(area,function(k,v){
-			// 			if(k == "img"){
-			// 				newAreaUI.find('[datakey="' + k + '"]').attr('src',v);
-			// 			} else {
-			// 				newAreaUI.find('[datakey="' + k + '"]').text(v);
-			// 			}
-			// 		});
-			// 		$('.area-list').append(newAreaUI);
+			// if(data["status"] && data["area"]){
+			// 	var areaUI = $('.web-ui-template .area-info');
+			// 	var newAreaUI = areaUI.clone();
+			// 	$.each(data["area"],function(k,v){
+			// 		if(k == "img"){
+			// 			newAreaUI.find('[datakey="' + k + '"]').attr('src',v);
+			// 		} else if(k == "animals_list" ){
+			// 			var animalUI = $('.web-ui-template .animal-list-item');
+			// 			$.each(v,function(i,animal){
+			// 				console.log(animal);
+			// 				var newAnimalUI = animalUI.clone();
+			// 				$.each(animal,function(animalk,animalv){
+			// 					if(animalk == "img"){
+			// 						newAnimalUI.find('[datakey="' + animalk + '"]').attr('src',animalv);
+			// 					} else {
+			// 						newAnimalUI.find('[datakey="' + animalk + '"]').text(animalv);
+			// 					}
+			// 				});
+
+			// 				newAreaUI.find('.animals-list').append(newAnimalUI);
+			// 			});
+			// 		} else {
+			// 			newAreaUI.find('[datakey="' + k + '"]').text(v);
+			// 		}
 			// 	});
+
+			// 	$('.overlay-content').append(newAreaUI);
+			// 	overlay(true);
 			// } else {
 			// }
 		},
 		error : function( jqxhr, textStatus, error ) {
 		}
 	});
+}
+
+function addFavi(areaid,callback){
+	// var thisCallback = callback;
+	// $.ajax({
+	// 	url: "http://trusty-moment-134623.appspot.com/add_favi_count",
+	// 	type: "POST",
+	// 	dataType: "json",
+	// 	data:{
+	// 		"area_id" : areaid
+	// 	},
+	// 	cache: false,
+	// 	success: function(data) {
+	// 		if(data["status"] && data["faviCount"]){
+	// 			if(thisCallback && typeof(thisCallback) == "function"){
+	// 				console.log(data["faviCount"]);
+	// 				thisCallback(data["faviCount"]);
+	// 			}
+	// 		}
+	// 	},
+	// 	error : function( jqxhr, textStatus, error ) {
+	// 	}
+	// });
 }
 
 function overlay(status){

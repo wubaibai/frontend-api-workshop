@@ -23,8 +23,6 @@ var jq_GET = (function(qurl) {
 	return b;
 })(window.location.search.substr(1).split('&'));
 
-var winW;
-var winH;
 var pageNow;
 var serverhost = "http://trusty-moment-134623.appspot.com"
 var apiURL = {
@@ -35,8 +33,6 @@ var apiURL = {
 }
 
 $(document).ready(function(){
-	winW = $(window).width();
-	winH = $(window).height();
 	pageNow = $('body').attr('rel');
 
 	$('.leave-overlay').on('click',function(){
@@ -51,11 +47,6 @@ $(document).ready(function(){
 			thisLikeWrap.find('[datakey="faviCount"]').text(data);
 		});
 	});
-});
-
-$(window).resize(function(){
-	winW = $(window).width();
-	winH = $(window).height();
 });
 
 $(window).load(function(){
